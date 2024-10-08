@@ -113,6 +113,19 @@ class NorGate(OrGate):
         else:
             return 1
 
+class XorGate(BinaryGate):
+
+    def __init__(self, label):
+        BinaryGate.__init__(self, label)
+
+    def performGateLogic(self):
+        a = self.getPinA()
+        b = self.getPinB()
+        if a + b % 2 == 1:
+            return 1
+        else:
+            return 0
+
 
 class NotGate(UnaryGate):
 
@@ -181,5 +194,9 @@ def main():
     c6 = Connector(g6, g7)
 
     print(g4.getOutput() == g7.getOutput())
+
+    # исключающее XOR(ИЛИ)
+    g = XorGate("XorGate")
+    print(g.getOutput())
 
 main()
