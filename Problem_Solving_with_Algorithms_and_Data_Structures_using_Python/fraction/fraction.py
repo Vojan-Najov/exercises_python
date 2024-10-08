@@ -33,11 +33,30 @@ class Fraction:
 
         return str(self.num) + "/" + str(self.den)
 
+    def __repr__(self):
+
+        return f"Fraction({self.num}, {self.den})"
+
     def __add__(self, other):
 
         new_num = self.num * other.den + other.num * self.den
         new_den = self.den * other.den
         return Fraction(new_num, new_den)
+
+    def __radd__(self, other):
+
+        if type(other) is int:
+            return Fraction(self.num + other * self.den, self.den)
+
+    def __iadd__(self, other):
+
+        new_num = self.num * other.den + other.num * self.den
+        new_den = self.den * other.den
+        common = gcd(new_num, new_den)
+        self.num = new_num // common
+        self.den = new_den // common
+
+        return self
 
     def __sub__(self, other):
 
@@ -178,6 +197,21 @@ def main():
 
     f = Fraction(2, -10)
     print(f)
+    print()
+
+    f = Fraction(1, 5)
+    print(4 + f)
+    print()
+
+    f = Fraction(1, 5)
+    f += Fraction(1, 5)
+    print(f)
+    print()
+
+    f1 = Fraction(1, 5)
+    print(repr(f1))
+    f2 = eval(repr(f1))
+    print(f1 == f2)
     print()
 
 main()
