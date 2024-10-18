@@ -43,5 +43,4 @@ for i in range(1, nn + 1):
             print(f"{j * nn + i:{width}}", end=" ")
         else:
             print(f"{(j + 1) * nn - i + 1:{width}}", end=" ")
-
     print()
