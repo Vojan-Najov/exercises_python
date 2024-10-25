@@ -3,7 +3,7 @@
 from stack import Stack
 
 def infixToPostfix(infixexpr):
-    prec = {"*": 3, "/": 3, "+": 2, "-": 2, "(": 1}
+    prec = {"^": 4, "*": 3, "/": 3, "+": 2, "-": 2, "(": 1}
     opStack = Stack()
     postfixList = []
     tokenList = infixexpr.split()
@@ -44,7 +44,9 @@ def postfixEval(postfixExpr):
     return operandStack.pop()
 
 def doMath(op, op1, op2):
-    if op == "*":
+    if op == "^":
+        return op1 ** op2
+    elif op == "*":
         return op1 * op2
     elif op == "/":
         return op1 / op2
@@ -59,5 +61,9 @@ if __name__ == "__main__":
     print(infixToPostfix("( A + B ) * ( C + D )"))
     print(infixToPostfix("( A + B ) * C"))
     print(infixToPostfix("A + B * C"))
+    print(infixToPostfix("9 + 3 * 5 / ( 8 - 4 )"))
+    print(infixToPostfix("5 * 3 ^ ( 4 - 2 )"))
+    print(infixToPostfix("2 ^ 3 ^ 4"))
+
 
     print(postfixEval("7 8 + 3 2 + /"))
