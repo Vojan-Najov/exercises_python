@@ -51,7 +51,8 @@ class Programmer():
     def __init__(self, name, position):
         self.name = name
         self.position = position
-        self.salary = salary_list[employee_positions.index(position)]
+        self.salary = \
+                Programmer.salary_list[Programmer.employee_positions.index(position)]
         self.savings = 0
         self.time = 0
 
@@ -59,14 +60,14 @@ class Programmer():
         self.time += time
         self.savings += self.salary * time
 
-    def rize(self):
-        match employee_positions.index(self.position):
+    def rise(self):
+        match Programmer.employee_positions.index(self.position):
             case 0:
-                self.postion = employee_positions[1]
-                self.salary = salary_list[1]
+                self.position = Programmer.employee_positions[1]
+                self.salary = Programmer.salary_list[1]
             case 1:
-                self.postion = employee_positions[2]
-                self.salary = salary_list[2]
+                self.position = Programmer.employee_positions[2]
+                self.salary = Programmer.salary_list[2]
             case 2:
                 self.salary += 1
 
@@ -78,17 +79,16 @@ if __name__ == '__main__':
 
     programmer = Programmer('Васильев Иван', 'Junior')
     programmer.work(750)
-    print(programmer.info())
-# Васильев Иван 750ч. 7500тгр.
+    assert programmer.info() == 'Васильев Иван 750ч. 7500тгр.'
+
     programmer.rise()
     programmer.work(500)
-    print(programmer.info())
-# Васильев Иван 1250ч. 15000тгр.
+    assert programmer.info() == 'Васильев Иван 1250ч. 15000тгр.'
+
     programmer.rise()
     programmer.work(250)
-    print(programmer.info())
-# Васильев Иван 1500ч. 20000тгр.
+    assert programmer.info() == 'Васильев Иван 1500ч. 20000тгр.'
+
     programmer.rise()
     programmer.work(250)
-    print(programmer.info())
-# Васильев Иван 1750ч. 25250тгр.
+    assert programmer.info() == 'Васильев Иван 1750ч. 25250тгр.'
