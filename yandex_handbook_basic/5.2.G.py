@@ -92,13 +92,15 @@ class Fraction():
 
     def __truediv__(self, other):
         num = self.num * other.denom
-        denom = self.denom * other.numm
+        denom = self.denom * other.num
         return self.__class__(num, denom)
 
     def __itruediv__(self, other):
         from math import gcd
         num = self.num * other.denom
-        denom = self.denom * other.numm
+        denom = self.denom * other.num
+        if denom < 0:
+            num, denom = -num, -denom
         n = gcd(num, denom)
         self.num = num // n
         self.denom = denom // n
@@ -138,10 +140,45 @@ class Fraction():
         self.denom = denom // n
         return self.denom
 
+    def reverse(self):
+        return self.__class__(self.denom, self.num)
+
 
 if __name__ == '__main__':
     a = Fraction(1, 3)
     b = Fraction(1, 2)
     c = a * b
     print(a, b, c, a is c, b is c)
+
+    a = Fraction(1, 3)
+    c = b = Fraction(2, 1).reverse()
+    b /= a
+    print(a, b, c, b is c)
+
+    a = Fraction(2, 6)
+    b = Fraction(-11, 3)
+    print(a.reverse(), b.reverse())
+    print(a * b)
+    print(a * -b)
+    print(-a * -b)
+    print(-a * b)
+    print(a / b)
+    print(a / -b)
+    print(-a / -b)
+    print(-a / b)
+
+    a = Fraction(2, 6)
+    b = Fraction(-11, 3)
+    print(*map(repr, [a, b]))
+    a *= b
+    print(a)
+    a = Fraction(2, 6)
+    a *= -b
+    print(a)
+    a = Fraction(2, 6)
+    a /= b
+    print(a)
+    a = Fraction(2, 6)
+    a /= -b
+    print(a)
 
