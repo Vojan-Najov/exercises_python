@@ -37,13 +37,22 @@ import numpy as np
 
 
 def snake(m, n, direction='H'):
-    gen = (for i in range(n) for range(1, m + 1))
+    if direction == 'H':
+        gen = (
+            i * m + j if i % 2 == 0 else (i + 1) * m + 1 - j
+            for i in range(n) 
+            for j in range(1, m + 1)
+        )
+        return np.array(list(gen), dtype='int16').reshape(n, m)
+    else:
+        return snake(n, m).transpose()
 
-    return np.array(list(gen), dtype='int16').reshape(n, m)
 
 
-def main()
+def main():
     print(snake(5, 3))
+    print(snake(3, 5))
+    print(snake(5, 3, direction='V'))
 
 
 if __name__ == '__main__':
