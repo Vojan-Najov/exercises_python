@@ -40,7 +40,15 @@
 import pandas as pd
 
 
-def cheque(price_list, **kwrgs):
+def cheque(price_list, **kwargs):
+    d = {}
+    keys = list(sorted(kwargs.keys()))
+    d['product'] = keys
+    d['price'] = [price_list[k] for k in keys]
+    d['number'] = [kwargs[k] for k in keys]
+    d['cost'] = [d['number'][i] * d['price'][i] for i, _ in enumerate(keys)]
+
+    return pd.DataFrame(d)
 
 
 def main():
