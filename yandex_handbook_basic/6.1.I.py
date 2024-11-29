@@ -35,12 +35,22 @@ import numpy as np
 
 
 def rotate(matrix, angle):
-    if angle == 90:
-        return matrix
+    if angle <= 180:
+        while angle > 0:
+            matrix = np.rot90(matrix, -1)
+            angle -= 90
+    else:
+        angle -= 360
+        while angle < 0:
+            matrix = np.rot90(matrix)
+            angle += 90
+    return matrix
+
 
 
 def main():
     print(rotate(np.arange(12).reshape(3, 4), 90))
+    print(rotate(np.arange(12).reshape(3, 4), 270))
 
 
 if __name__ == '__main__':
